@@ -8,17 +8,20 @@ import {Const, trans} from '../../../utils';
 import {images} from '../../../assets';
 import {get, post} from '../../../services/ServiceHandle';
 
-import {ItemProduct} from '../../../components/molecules';
+import {Button, ItemProduct} from '../../../components/molecules';
 import IconCart from '../../../components/molecules/IconCart';
 import {useDispatch, useSelector} from 'react-redux';
 import {CartRedux} from '../../../redux';
 import ModalChangeQuantity from '../../../components/molecules/ModalChangeQuantity';
+import styles from './styles';
+import {Mixin} from '../../../styles';
 
 const ListProduct = ({navigation, route}) => {
   const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
   const numberProductCart = useSelector(
     state => state.CartReducer.numberProductCart,
   );
+  const store = useSelector(state => state.StoreReducer.store);
 
   const refModal = useRef();
 
@@ -30,7 +33,7 @@ const ListProduct = ({navigation, route}) => {
 
   useEffect(() => {
     const params = {
-      productStoreId: 'KBLS2',
+      productStoreId: store,
       pagesize: 0,
       pagenum: 200,
     };
@@ -53,8 +56,9 @@ const ListProduct = ({navigation, route}) => {
   const renderItem = item => {
     return (
       <ItemProduct
+        disabled
         item={item}
-        onPress={() => navigation.navigate('DetailProduct', {item})}
+        // onPress={() => navigation.navigate('DetailProduct', {item})}
         addToCart={() => {
           setItemProduct(item);
           setVisibleModal(true);
@@ -83,6 +87,7 @@ const ListProduct = ({navigation, route}) => {
           keyExtractor={(item, index) => index.toString()}
           contentContainerStyle={{
             paddingVertical: 10,
+            paddingBottom: Mixin.moderateSize(80),
           }}
         />
       </View>
@@ -94,6 +99,13 @@ const ListProduct = ({navigation, route}) => {
           detailProduct={itemProduct}
           isVisible={visibleModal}
           onBackdropPress={() => setVisibleModal(false)}
+        />
+      )}
+      {numberProductCart > 0 && (
+        <Button
+          containerStyle={styles.btnGoCart}
+          title={`Giỏ hàng (${numberProductCart} sản phẩm)`}
+          onPress={() => navigation.navigate('CartScreen')}
         />
       )}
     </View>

@@ -13,7 +13,7 @@ import {
 import {useSelector} from 'react-redux';
 
 const Stack = createStackNavigator();
-const LoginNavigator = () => {
+const CompanyNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -21,14 +21,9 @@ const LoginNavigator = () => {
         gestureEnabled: false,
         animationEnabled: true,
       }}>
-      {/* <Stack.Screen name="IntroScreen" component={IntroScreen} /> */}
-      {/* <Stack.Screen name="LoginCompanyScreen" component={LoginCompanyScreen} /> */}
-      <Stack.Screen name="StartLogin" component={StartLogin} />
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="LoginCompanyScreen" component={LoginCompanyScreen} />
     </Stack.Navigator>
   );
 };
 
-export default LoginNavigator;
+export default CompanyNavigator;

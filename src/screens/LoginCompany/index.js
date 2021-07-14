@@ -33,13 +33,13 @@ const LoginCompanyScreen = props => {
 
   useEffect(() => {
     if (type === 'GET_DOMAIN_FAILED') {
-      console.log('GET_DOMAIN_FAILED');
       setMessage(errorMessage);
       setModalError(true);
     }
-    if (type === 'GET_DOMAIN_SUCCESS') {
-      navigation.navigate('StartLogin');
-    }
+
+    // return () => {
+    //   ignore = true;
+    // };
   }, [type]);
 
   const getCompany = () => {

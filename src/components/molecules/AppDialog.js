@@ -27,6 +27,7 @@ const AppDialog = props => {
           <Button
             onPress={onPressClose}
             containerStyle={styles.btnCustom}
+            titleColor={Colors.PRIMARY}
             title={titleClose || trans('close')}
           />
           {onPressConfirm && (
@@ -34,6 +35,7 @@ const AppDialog = props => {
               onPress={onPressConfirm}
               containerStyle={styles.btnCustom}
               title={titleConfirm}
+              titleColor={Colors.PRIMARY}
             />
           )}
         </View>
@@ -61,6 +63,8 @@ const styles = {
     justifyContent: 'flex-end',
   },
   btnCustom: {
+    backgroundColor: Colors.WHITE,
+    width: 'auto',
     height: 'auto',
     marginLeft: Mixin.moderateSize(12),
     alignSelf: 'center',

@@ -24,6 +24,7 @@ const overallReducer = createReducer(initialState, {
   },
   [Actions.getDomain.success]: (state, action) => {
     state.domain = `https://${action.payload}/customer-apis/control`;
+    // state.domain = `https://${action.payload}/mobileservices/control`;
     state.errorMessage = '';
     state.type = action.type;
   },
@@ -52,6 +53,12 @@ const overallReducer = createReducer(initialState, {
   [Actions.logout.success]: (state, action) => {
     state.userAuthen = initialState;
     state.accountUser = null;
+  },
+
+  // reset Company
+  [Actions.resetCompany]: (state, action) => {
+    state.domain = '';
+    state.type = '';
   },
 });
 

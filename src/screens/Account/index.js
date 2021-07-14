@@ -5,6 +5,7 @@ import HistoryPoint from './HistoryPoint';
 import ReportScreen from './Report';
 import PromotionScreen from './Promotion';
 import Policy from './Policy';
+import ChangePassword from './ChangePassword';
 
 export {
   MainAccount,
@@ -14,4 +15,5 @@ export {
   ReportScreen,
   PromotionScreen,
   Policy,
+  ChangePassword,
 };

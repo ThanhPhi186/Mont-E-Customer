@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {Const, trans} from '../../utils';
 import styles from './styles';
@@ -20,46 +20,57 @@ const Register = ({navigation}) => {
     {label: trans('male'), value: 'M'},
     {label: trans('female'), value: 'F'},
   ]);
-  const [customerName, setCustomerName] = useState('');
+  const [name, setName] = useState('');
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassWord] = useState('');
-  const [errMessage, setErrMessage] = useState('');
-  const [modalError, setModalError] = useState(false);
-
-  const [note, setNote] = useState('');
-
+  const [RePassword, setRePassWord] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(moment().format('DD-MM-YYYY'));
+  const [address, setAddress] = useState('');
 
   const [loading, setLoading] = useState(false);
 
   const handelCheckValue = () => {
+    const regex =
+      /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
     if (!userName) {
-      setErrMessage('Tên đăng nhập không được để trống');
+      Alert.alert('Tên đăng nhập không được để trống');
       return true;
     }
     if (!password) {
-      setErrMessage('Mật khẩu không được để trống');
+      Alert.alert('Mật khẩu không được để trống');
       return true;
     }
-    if (password.length < 6) {
-      setErrMessage('Mật khẩu không được nhỏ hơn 6 kí tự');
+    if (!RePassword) {
+      Alert.alert('Vui lòng nhập lại mật khẩu');
       return true;
     }
-    if (!phoneNumber) {
-      setErrMessage(trans('phoneNumberNotEmpty'));
+    if (password !== RePassword) {
+      Alert.alert('Mật khẩu không khớp');
       return true;
     }
-    if (phoneNumber.length < 9) {
-      setErrMessage(trans('phoneNumberNotCorrect'));
+    if (password.length < 6 || RePassword.length < 6) {
+      Alert.alert('Mật khẩu không được nhỏ hơn 6 kí tự');
       return true;
     }
+    if (!name) {
+      Alert.alert('Vui lòng nhập họ và tên');
+      return true;
+    }
+    if (!regex.test(phoneNumber)) {
+      Alert.alert(trans('phoneNumberNotCorrect'));
+      return true;
+    }
+    if (!address) {
+      Alert.alert('Vui lòng nhập địa chỉ của bạn');
+      return true;
+    }
+
     return false;
   };
 
   const createCustomer = () => {
     if (handelCheckValue()) {
-      setModalError(true);
       return;
     }
     setLoading(true);
@@ -80,11 +91,11 @@ const Register = ({navigation}) => {
     //   stateProvinceGeoId: addressDetail[1].long_name,
     //   countryGeoId: addressDetail[2].long_name,
     // };
-    post(BaseUrl + Const.API.RegisterCustomerAccount).then(res => {
-      if (res.ok) {
-      } else {
-      }
-    });
+    // post(BaseUrl + Const.API.RegisterCustomerAccount).then(res => {
+    //   if (res.ok) {
+    //   } else {
+    //   }
+    // });
   };
 
   return (
@@ -116,14 +127,14 @@ const Register = ({navigation}) => {
           isRequired
           title={trans('ReEnterPassword')}
           placeholder={trans('ReEnterPassword')}
-          value={password}
-          onChangeText={setPassWord}
+          value={RePassword}
+          onChangeText={setRePassWord}
         />
         <FormInput
           title={trans('firstAndLastName')}
           placeholder={trans('firstAndLastName')}
-          value={customerName}
-          onChangeText={setCustomerName}
+          value={name}
+          onChangeText={setName}
         />
         <FormInput
           title={trans('dateOfBirth')}
@@ -152,12 +163,12 @@ const Register = ({navigation}) => {
           onChangeText={setPhoneNumber}
           keyboardType="numeric"
         />
-        <AppDialog
-          content={errMessage}
-          isVisible={modalError}
-          onPressClose={() => setModalError(false)}
-          value={note}
-          onChangeText={setNote}
+        <FormInput
+          title={trans('address')}
+          isRequired
+          placeholder={trans('address')}
+          value={address}
+          onChangeText={setAddress}
         />
       </KeyboardAwareScrollView>
     </View>

@@ -59,6 +59,7 @@ export default {
     GetProductByInfoSearch: '/mGetProductByInfoSearch',
     SubmitFbCustomer: '/submitFbCustomer',
     RegisterCustomerAccount: '/mRegisterCustomerAccount',
+    GetProductStoreCustomer: '/getProductStoreCustomer',
   },
   RESPONSE_CODES: {
     SUCCESS: {

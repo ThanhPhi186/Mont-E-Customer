@@ -21,15 +21,11 @@ const ChangeStore = ({navigation}) => {
   }, [dispatch]);
 
   const onChangeStore = item => {
-    // RNBootSplash.show();
     dispatch(StoreRedux.Actions.changeStore(item.productStoreId));
     navigation.reset({
       index: 0,
       routes: [{name: 'HomeScreen'}],
     });
-    // setTimeout(() => {
-    //   RNBootSplash.hide();
-    // }, 1000);
   };
 
   const renderItem = elm => {

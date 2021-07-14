@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Platform, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {images} from '../../assets';
 import {AppImage, AppLoading, AppText} from '../../components/atoms';
@@ -93,7 +93,7 @@ const LoginScreen = ({navigation}) => {
           <AppText title style={styles.textHello}>
             Xin chào!
           </AppText>
-          <AppText>Xin vui lòng đăng nhập bằng số điện thoại của bạn</AppText>
+          <AppText>Xin vui lòng đăng nhập bằng tài khoản của bạn</AppText>
         </View>
         <View style={styles.viewInput}>
           <View style={styles.viewPhone}>
@@ -111,14 +111,14 @@ const LoginScreen = ({navigation}) => {
             placeholder="Mật khẩu"
             autoCapitalize="none"
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate('ForgotPassword')}>
             <AppText
               containerStyle={styles.viewForgotPass}
               style={styles.txtForgot}>
               {trans('forgotPassword')} ?
             </AppText>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <Button

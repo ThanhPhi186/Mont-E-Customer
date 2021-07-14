@@ -1,12 +1,15 @@
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {images} from '../../assets';
 import {AppImage, AppText} from '../../components/atoms';
 import {Button} from '../../components/molecules';
+import {AuthenOverallRedux} from '../../redux';
 import {Colors} from '../../styles';
 import {containerCenter} from '../../styles/GlobalStyles';
 
 const StartLogin = ({navigation}) => {
+  const dispatch = useDispatch();
   return (
     <View style={containerCenter}>
       <View style={{flex: 1}} />
@@ -20,7 +23,7 @@ const StartLogin = ({navigation}) => {
       <AppText>Đăng nhập để kinh doanh cùng Mont-E</AppText>
       <Button
         containerStyle={{marginTop: 40}}
-        title="Đăng nhập bằng số điện thoại"
+        title="Đăng nhập bằng tài khoản"
         onPress={() => navigation.navigate('LoginScreen')}
       />
 
@@ -39,8 +42,8 @@ const StartLogin = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={{flex: 1, justifyContent: 'center'}}
-        onPress={() => navigation.goBack()}>
-        <AppText style={{fontWeight: 'bold'}}>Bỏ qua</AppText>
+        onPress={() => dispatch(AuthenOverallRedux.Actions.resetCompany())}>
+        <AppText style={{fontWeight: 'bold'}}>Quay lại</AppText>
       </TouchableOpacity>
     </View>
   );

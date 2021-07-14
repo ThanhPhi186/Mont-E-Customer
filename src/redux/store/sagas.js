@@ -9,7 +9,7 @@ const getBaseUrl = state => state.AuthenOverallReducer.domain;
 function* getListStoreAsync(action) {
   try {
     const baseURL = yield select(getBaseUrl);
-    const url = baseURL + Const.API.GetProductStore;
+    const url = baseURL + Const.API.GetProductStoreCustomer;
 
     const response = yield call(post, url, action.payload);
     if (response.ok) {

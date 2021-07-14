@@ -13,6 +13,7 @@ const storeReducer = createReducer(initialState, {
   },
   [Actions.getListStore.success]: (state, action) => {
     state.listStore = action.payload.listProductStore;
+    state.store = action.payload.listProductStore[0].productStoreId;
     state.loading = false;
   },
   [Actions.getListStore.failed]: (state, action) => {

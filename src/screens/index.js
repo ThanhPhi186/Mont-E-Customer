@@ -12,6 +12,7 @@ import {
   ReportScreen,
   PromotionScreen,
   Policy,
+  ChangePassword,
 } from './Account';
 import IntroScreen from './IntroScreen';
 import {ListProduct, DetailProduct} from './Product';
@@ -55,4 +56,5 @@ export {
   LoginCompanyScreen,
   ChangeStore,
   Register,
+  ChangePassword,
 };

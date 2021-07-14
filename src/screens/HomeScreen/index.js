@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -21,25 +21,72 @@ import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import IconCart from '../../components/molecules/IconCart';
 import numeral from 'numeral';
-import {CartRedux} from '../../redux';
+import {CartRedux, StoreRedux} from '../../redux';
 import {device_width} from '../../styles/Mixin';
 import ItemCategory from './component/ItemCategory';
 import moment from 'moment';
+import AppDialog from '../../components/molecules/AppDialog';
+import {trans} from '../../utils';
 
 const HomeScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const numberProductCart = useSelector(
     state => state.CartReducer.numberProductCart,
   );
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
+  const listStore = useSelector(state => state.StoreReducer.listStore);
+  const store = useSelector(state => state.StoreReducer.store);
+  const cookies = useSelector(state => state.AuthenOverallReducer.cookies);
 
-  const sessionId = useSelector(state => state.AuthenOverallReducer.cookies);
-
-  console.log('caculate', moment(sessionId.route.expires).unix(), moment.now());
+  const [modalChangesStore, setModalChangeStore] = useState(false);
+  const [itemStore, setItemStore] = useState();
 
   console.log(
-    'sessionId',
-    moment(sessionId.route.expires).unix() < moment.now() / 1000,
+    'xxxx',
+    moment(cookies.route.expires).unix() < moment.now() / 1000,
   );
+
+  useEffect(() => {
+    dispatch(StoreRedux.Actions.getListStore.request());
+  }, [dispatch]);
+
+  const onChangeStore = () => {
+    dispatch(StoreRedux.Actions.changeStore(itemStore.productStoreId));
+    setModalChangeStore(false);
+  };
+
+  const renderItem = elm => {
+    return (
+      <TouchableOpacity
+        disabled={store === elm.productStoreId}
+        style={
+          store === elm.productStoreId
+            ? {...styles.btn, backgroundColor: Colors.PRIMARY}
+            : styles.btn
+        }
+        onPress={() => {
+          setModalChangeStore(true);
+          setItemStore(elm);
+        }}>
+        <AppText
+          style={
+            store === elm.productStoreId
+              ? {...styles.storeName, color: Colors.WHITE}
+              : styles.storeName
+          }>
+          {elm.storeName}
+        </AppText>
+        <AppText
+          style={
+            store === elm.productStoreId
+              ? {...styles.storeCode, color: Colors.WHITE}
+              : styles.storeCode
+          }>
+          {elm.productStoreId}
+        </AppText>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={container}>
@@ -52,7 +99,7 @@ const HomeScreen = ({navigation}) => {
               <View>
                 <AppText style={styles.txtHello}>Xin chào,</AppText>
                 <AppText title style={styles.txtName}>
-                  {userInfo.lastName} {userInfo.middleName} {userInfo.firstName}
+                  {userInfo.partyName}
                 </AppText>
               </View>
             </View>
@@ -73,7 +120,7 @@ const HomeScreen = ({navigation}) => {
           borderRadius: 10,
           flexDirection: 'row',
           alignItems: 'center',
-          marginTop: '-7%',
+          top: -40,
           shadowColor: '#000',
           shadowOffset: {
             width: 0,
@@ -151,7 +198,32 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
 
-      <View style={{flex: 4}}></View>
+      <View style={{flex: 4}}>
+        <View style={styles.containerListStore}>
+          <AppText
+            title
+            style={{paddingHorizontal: 16, paddingTop: 16, fontWeight: 'bold'}}>
+            Kênh bán hàng :
+          </AppText>
+          <FlatList
+            data={listStore}
+            renderItem={({item}) => renderItem(item)}
+            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={{
+              paddingHorizontal: 16,
+              paddingBottom: 16,
+            }}
+          />
+        </View>
+      </View>
+      <AppDialog
+        content={trans('confirmChangeStore')}
+        isVisible={modalChangesStore}
+        onPressClose={() => setModalChangeStore(false)}
+        titleConfirm={trans('yes')}
+        onPressConfirm={onChangeStore}
+        titleClose={trans('no')}
+      />
     </View>
   );
 };

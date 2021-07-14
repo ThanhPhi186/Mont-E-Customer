@@ -1,5 +1,5 @@
 import {Colors, Mixin} from '../../../styles';
-import {FONT_SIZE_14} from '../../../styles/Typography';
+import {FONT_SIZE_14, FONT_SIZE_16} from '../../../styles/Typography';
 
 const styles = {
   containerItem: {
@@ -93,6 +93,12 @@ const styles = {
     fontSize: 15,
     fontWeight: 'bold',
     marginVertical: 2,
+  },
+  txtEmpty: {
+    color: Colors.GRAY,
+    fontSize: FONT_SIZE_16,
+    textAlign: 'center',
+    marginTop: Mixin.moderateSize(80),
   },
 };
 

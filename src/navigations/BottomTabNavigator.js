@@ -22,17 +22,17 @@ import {
   TopSales,
   Policy,
   ChangeStore,
+  ChangePassword,
 } from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {CustomButtonTab} from '../components/molecules';
 import {trans} from '../utils';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../styles';
 import {FONT_SIZE_10} from '../styles/Typography';
 import {device_width} from '../styles/Mixin';
 import TabShape from './TabShape';
-import {isIphoneX} from '../helpers/iphoneXHelper';
 import {NAVIGATION_BOTTOM_TABS_HEIGHT} from '../styles/GlobalStyles';
 
 const Tab = createBottomTabNavigator();
@@ -67,7 +67,8 @@ const BottomTabNavigator = () => {
       routeName === 'HistoryPoint' ||
       routeName === 'ReportScreen' ||
       routeName === 'PromotionScreen' ||
-      routeName === 'Policy'
+      routeName === 'Policy' ||
+      routeName === 'ChangePassword'
     ) {
       return false;
     }
@@ -128,12 +129,12 @@ const BottomTabNavigator = () => {
         <Stack.Screen name="ReportScreen" component={ReportScreen} />
         <Stack.Screen name="PromotionScreen" component={PromotionScreen} />
         <Stack.Screen name="Policy" component={Policy} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
       </Stack.Navigator>
     );
   };
 
   function MyTabBar({state, descriptors, navigation}) {
-    console.log('isIphoneX', isIphoneX());
     const focusedOptions = descriptors[state.routes[state.index].key].options;
 
     const tabWidth = React.useMemo(
@@ -196,7 +197,12 @@ const BottomTabNavigator = () => {
               });
             };
             if (index === 2) {
-              return <CustomButtonTab key={index} />;
+              return (
+                <CustomButtonTab
+                  onPress={() => Alert.alert('aaa')}
+                  key={index}
+                />
+              );
             }
 
             return (
@@ -294,15 +300,12 @@ const BottomTabNavigator = () => {
 
 const styles = {
   content: {
-    zIndex: 0,
     position: 'absolute',
     bottom: 0,
   },
   subContent: {
     flexDirection: 'row',
-    zIndex: 1,
     position: 'absolute',
-    bottom: 0,
     height: NAVIGATION_BOTTOM_TABS_HEIGHT,
     width: device_width,
   },

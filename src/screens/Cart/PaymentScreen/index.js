@@ -4,29 +4,24 @@ import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppText} from '../../../components/atoms';
+import {AppLoading, AppText} from '../../../components/atoms';
 import {Button} from '../../../components/molecules';
-import {CartRedux} from '../../../redux';
 import {post} from '../../../services/ServiceHandle';
 import {container} from '../../../styles/GlobalStyles';
 import {Const, trans} from '../../../utils';
 import ProductPaymentItem from '../Component/ProductPaymentItem';
 import styles from './styles';
 import numeral from 'numeral';
-import {sum} from 'lodash';
 import {Colors} from '../../../styles';
-import FastImage from 'react-native-fast-image';
 
 const PaymentScreen = ({navigation}) => {
   const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
   const dataCart = useSelector(state => state.CartReducer.listProductCart);
+  const store = useSelector(state => state.StoreReducer.store);
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
 
-  const totalPrice = sum(dataCart.map(elm => elm.priceVAT * elm.amount));
-
   const [orderValue, setOrderValue] = useState();
-
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const products = dataCart?.map(elm => {
     return {
@@ -38,12 +33,13 @@ const PaymentScreen = ({navigation}) => {
 
   useEffect(() => {
     const params = {
-      productStoreId: 'KBLS2',
-      customerId: 'DLBL121290',
+      productStoreId: store,
+      customerId: userInfo.partyId,
       products: JSON.stringify(products),
     };
+    console.log('params', params);
     const modifyCart = () => {
-      post(BaseUrl + Const.API.ModifyCart, params).then(res => {
+      post(BaseUrl + Const.API.CreateCart, params).then(res => {
         if (res.ok) {
           setOrderValue(res.data.order);
         }
@@ -52,15 +48,28 @@ const PaymentScreen = ({navigation}) => {
     modifyCart();
   }, [BaseUrl]);
 
-  const orderPayment = () => {
-    const carts = dataCart.map(elm => elm.id);
-    console.log('carts', carts);
-    const params = {};
-    post(Const.API.baseURL + Const.API.ImportOrder, params).then(res => {
-      if (res.ok) {
-        // dispatch(CartRedux.Actions.getCart.request());
-        SimpleToast.show('Đặt hàng thành công', SimpleToast.SHORT);
-        navigation.popToTop();
+  const submitOrder = () => {
+    setLoading(true);
+    const params = {
+      productStoreId: store,
+      customerId: userInfo.partyId,
+      products: JSON.stringify(products),
+    };
+    post(BaseUrl + Const.API.SubmitOrder, params).then(res => {
+      if (!res.data._ERROR_MESSAGE_ && !res.data.errorMessage) {
+        setLoading(false);
+        setTimeout(() => {
+          SimpleToast.show(trans('createOrderSuccessfully'), SimpleToast.SHORT);
+          navigation.popToTop();
+        }, 500);
+      } else {
+        setLoading(false);
+        setTimeout(() => {
+          SimpleToast.show(
+            res.data._ERROR_MESSAGE_ || res.data.errorMessage,
+            SimpleToast.SHORT,
+          );
+        }, 500);
       }
     });
   };
@@ -75,7 +84,7 @@ const PaymentScreen = ({navigation}) => {
         <Appbar.BackAction color="white" onPress={() => navigation.goBack()} />
         <Appbar.Content color="white" title={trans('purchase')} />
       </Appbar.Header>
-
+      <AppLoading isVisible={loading} />
       <View style={{flex: 1, padding: 16}}>
         <View style={styles.containerOrder}>
           <FlatList
@@ -114,13 +123,13 @@ const PaymentScreen = ({navigation}) => {
             <Button
               containerStyle={styles.btnCancel}
               title={trans('cancelOrder')}
-              onPress={orderPayment}
+              onPress={submitOrder}
               titleColor={Colors.PRIMARY}
             />
             <Button
               containerStyle={styles.btnOrdered}
               title={trans('confirm')}
-              onPress={orderPayment}
+              onPress={submitOrder}
             />
           </View>
         </View>

@@ -30,14 +30,19 @@ const MainAccount = ({navigation}) => {
     dispatch(AuthenOverallRedux.Actions.logout.request());
   };
 
+  const changeCompany = () => {
+    dispatch(AuthenOverallRedux.Actions.logout.request());
+    dispatch(AuthenOverallRedux.Actions.resetCompany());
+  };
+
   return (
     <View style={styles.container}>
       <BannerBehind backGround={images.ic_Background} avatar={images.avatar} />
       <View style={styles.viewInfo}>
         <AppText title style={styles.txtName}>
-          {userInfo.lastName} {userInfo.middleName} {userInfo.firstName}
+          {userInfo.lastName} {userInfo.middleName} {userInfo.partyName}
         </AppText>
-        <AppText style={styles.txtInfo}>{userInfo.username}</AppText>
+        <AppText style={styles.txtInfo}>{userInfo.partyId}</AppText>
       </View>
       <View style={{flex: 1}}>
         <View style={styles.largeIndicate} />
@@ -48,10 +53,16 @@ const MainAccount = ({navigation}) => {
             paddingBottom:
               NAVIGATION_BOTTOM_TABS_HEIGHT + HEIGHT_MIDDLE_HOME_BTN,
           }}>
-          <ItemAccount
+          {/* <ItemAccount
             icon="file"
             title="Lịch sử tích điểm"
             onPress={() => navigation.navigate('HistoryPoint')}
+          /> */}
+          <View style={styles.smallIndicate} />
+          <ItemAccount
+            icon="clock-outline"
+            title="Lịch sử nhập hàng"
+            onPress={() => navigation.navigate('HistoryOrder')}
           />
           <View style={styles.smallIndicate} />
           <ItemAccount
@@ -61,27 +72,27 @@ const MainAccount = ({navigation}) => {
           />
           <View style={styles.smallIndicate} />
           <ItemAccount
-            icon="clock-outline"
-            title="Lịch sử nhập hàng"
-            onPress={() => navigation.navigate('HistoryOrder')}
-          />
-          <View style={styles.smallIndicate} />
-          <ItemAccount
             icon="gift-outline"
             title="Ưu đãi của tôi"
             onPress={() => navigation.navigate('PromotionScreen')}
           />
-          <View style={styles.smallIndicate} />
+          {/* <View style={styles.smallIndicate} />
           <ItemAccount
             icon="card-account-details-outline"
             title="Danh sách Khách Hàng"
             onPress={() => navigation.navigate('ListCustomer')}
+          /> */}
+          <View style={styles.smallIndicate} />
+          <ItemAccount
+            icon="key"
+            title={trans('changePass')}
+            onPress={() => navigation.navigate('ChangePassword')}
           />
           <View style={styles.smallIndicate} />
           <ItemAccount
-            icon="message-reply-text"
-            title="Chính sách Đại Lý"
-            onPress={() => navigation.navigate('Policy')}
+            icon="home-import-outline"
+            title={trans('companyChange')}
+            onPress={changeCompany}
           />
           <View style={styles.smallIndicate} />
           <ItemAccount icon="logout" title="Đăng xuất" onPress={logout} />

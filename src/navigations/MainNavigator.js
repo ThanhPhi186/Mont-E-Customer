@@ -5,14 +5,16 @@ import LoginNavigator from './LoginNavigator';
 
 import BottomTabNavigator from './BottomTabNavigator';
 import {useSelector} from 'react-redux';
+import CompanyNavigator from './CompanyNavigator';
 
 const MainNavigator = () => {
-  // const idToken = useSelector(state => state.AuthenOverallReducer.idToken);
   const authReducer = useSelector(state => state.AuthenOverallReducer);
+  const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
   return (
     <NavigationContainer>
-      {/* {idToken ? <BottomTabNavigator /> : <LoginNavigator />} */}
-      {authReducer.userAuthen._LOGIN_PASSED_ ? (
+      {!BaseUrl ? (
+        <CompanyNavigator />
+      ) : authReducer.userAuthen._LOGIN_PASSED_ ? (
         <BottomTabNavigator />
       ) : (
         <LoginNavigator />
