@@ -140,7 +140,7 @@ const PromotionScreen = ({navigation}) => {
           setModalLogout(false);
           setTimeout(() => {
             dispatch(AuthenOverallRedux.Actions.logout.request());
-          }, 500);
+          }, 700);
         }}
       />
     </View>

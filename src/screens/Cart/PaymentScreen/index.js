@@ -33,14 +33,15 @@ const PaymentScreen = ({navigation}) => {
 
   useEffect(() => {
     const params = {
+      mobilecustomer: 'Y',
       productStoreId: store,
       customerId: userInfo.partyId,
       products: JSON.stringify(products),
     };
     console.log('params', params);
     const modifyCart = () => {
-      post(BaseUrl + Const.API.CreateCart, params).then(res => {
-        if (res.ok) {
+      post(BaseUrl + Const.API.ModifyCart, params).then(res => {
+        if (!res.data._ERROR_MESSAGE_) {
           setOrderValue(res.data.order);
         }
       });
@@ -51,6 +52,7 @@ const PaymentScreen = ({navigation}) => {
   const submitOrder = () => {
     setLoading(true);
     const params = {
+      mobilecustomer: 'Y',
       productStoreId: store,
       customerId: userInfo.partyId,
       products: JSON.stringify(products),
@@ -61,7 +63,7 @@ const PaymentScreen = ({navigation}) => {
         setTimeout(() => {
           SimpleToast.show(trans('createOrderSuccessfully'), SimpleToast.SHORT);
           navigation.popToTop();
-        }, 500);
+        }, 700);
       } else {
         setLoading(false);
         setTimeout(() => {
@@ -69,7 +71,7 @@ const PaymentScreen = ({navigation}) => {
             res.data._ERROR_MESSAGE_ || res.data.errorMessage,
             SimpleToast.SHORT,
           );
-        }, 500);
+        }, 700);
       }
     });
   };

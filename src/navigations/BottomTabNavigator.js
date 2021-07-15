@@ -199,7 +199,7 @@ const BottomTabNavigator = () => {
             if (index === 2) {
               return (
                 <CustomButtonTab
-                  onPress={() => Alert.alert('aaa')}
+                  onPress={() => navigation.navigate('ListProduct')}
                   key={index}
                 />
               );
@@ -239,6 +239,9 @@ const BottomTabNavigator = () => {
       </View>
     );
   }
+  const middleComponent = () => {
+    return null;
+  };
 
   return (
     <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
@@ -252,7 +255,7 @@ const BottomTabNavigator = () => {
       <Tab.Screen name={trans('contact')} component={ContactScreen} />
       <Tab.Screen
         name="Lên đơn"
-        component={ChangeStore}
+        component={middleComponent}
         options={({route}) => ({
           tabBarVisible: getSalesProductVisibility(route),
         })}

@@ -1,32 +1,29 @@
-import React from 'react';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
-import {Appbar} from 'react-native-paper';
+import React, {useState} from 'react';
+import {ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppText} from '../../../components/atoms';
-import {Button} from '../../../components/molecules';
 import {AuthenOverallRedux} from '../../../redux';
-import {setToken} from '../../../services/ServiceHandle';
 import {
-  container,
   HEIGHT_MIDDLE_HOME_BTN,
   NAVIGATION_BOTTOM_TABS_HEIGHT,
 } from '../../../styles/GlobalStyles';
 import {trans} from '../../../utils';
 import {Colors, Mixin} from '../../../styles';
 import {device_height, device_width} from '../../../styles/Mixin';
-import FastImage from 'react-native-fast-image';
 import ItemAccount from '../component/ItemAccount';
 import BannerBehind from '../component/BannerBehind';
 import {images} from '../../../assets';
-import CookieManager from '@react-native-cookies/cookies';
+import {AppDialog} from '../../../components/molecules';
 
 const MainAccount = ({navigation}) => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector(state => state.AuthenOverallReducer.userAuthen);
 
+  const [modalLogout, setModalLogout] = useState(false);
+  const [modalChangeCompany, setModalChangeCompany] = useState(false);
+
   const logout = () => {
-    // dispatch(StoreRedux.Actions.changeChanel(''));
     dispatch(AuthenOverallRedux.Actions.logout.request());
   };
 
@@ -92,12 +89,28 @@ const MainAccount = ({navigation}) => {
           <ItemAccount
             icon="home-import-outline"
             title={trans('companyChange')}
-            onPress={changeCompany}
+            onPress={() => setModalChangeCompany(true)}
           />
           <View style={styles.smallIndicate} />
-          <ItemAccount icon="logout" title="Đăng xuất" onPress={logout} />
+          <ItemAccount
+            icon="logout"
+            title="Đăng xuất"
+            onPress={() => setModalLogout(true)}
+          />
         </ScrollView>
       </View>
+      <AppDialog
+        content={trans('confirmChangeCompany')}
+        isVisible={modalChangeCompany}
+        onPressClose={() => setModalChangeCompany(false)}
+        onPressConfirm={changeCompany}
+      />
+      <AppDialog
+        content={trans('confirmLogout')}
+        isVisible={modalLogout}
+        onPressClose={() => setModalLogout(false)}
+        onPressConfirm={logout}
+      />
     </View>
   );
 };

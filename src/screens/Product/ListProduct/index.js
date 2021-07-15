@@ -47,10 +47,13 @@ const ListProduct = ({navigation, route}) => {
     getListProduct();
   }, [BaseUrl]);
 
-  const addToCart = () => {
+  const addToCart = type => {
     const dataProduct = {...itemProduct, ...{amount: refModal.current}};
     dispatch(CartRedux.Actions.addToCart(dataProduct));
     setVisibleModal(false);
+    if (type === 'BUY_NOW') {
+      navigation.navigate('CartScreen');
+    }
   };
 
   const renderItem = item => {
@@ -95,7 +98,8 @@ const ListProduct = ({navigation, route}) => {
       {itemProduct && (
         <ModalChangeQuantity
           ref={refModal}
-          addToCart={addToCart}
+          goBuyNow={() => addToCart('BUY_NOW')}
+          addToCart={() => addToCart('CART')}
           detailProduct={itemProduct}
           isVisible={visibleModal}
           onBackdropPress={() => setVisibleModal(false)}

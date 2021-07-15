@@ -57,7 +57,7 @@ const ChangePassword = ({navigation}) => {
           SimpleToast.show(trans('changePassSuccess'));
           setTimeout(() => {
             dispatch(AuthenOverallRedux.Actions.logout.request());
-          }, 500);
+          }, 700);
         } else {
           if (res.data.login === 'FALSE') {
             return setModalLogout(true);
@@ -120,7 +120,7 @@ const ChangePassword = ({navigation}) => {
           setModalLogout(false);
           setTimeout(() => {
             dispatch(AuthenOverallRedux.Actions.logout.request());
-          }, 500);
+          }, 700);
         }}
       />
     </View>

@@ -93,4 +93,6 @@ export default {
   expiredToken: 'Phiên đăng nhập hết hạn',
   emptyPromotion: 'Hiện tại chưa có khuyến mãi nào',
   companyCodeNotEmpty: 'Mã công ty không được để trống',
+  confirmLogout: 'Bạn có chắc chắn muốn đăng xuất?',
+  confirmChangeCompany: 'Bạn có chắc chắn muốn thay đổi công ty',
 };

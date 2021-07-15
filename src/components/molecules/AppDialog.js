@@ -34,7 +34,7 @@ const AppDialog = props => {
             <Button
               onPress={onPressConfirm}
               containerStyle={styles.btnCustom}
-              title={titleConfirm}
+              title={titleConfirm || trans('continue')}
               titleColor={Colors.PRIMARY}
             />
           )}
@@ -48,7 +48,7 @@ export default AppDialog;
 const styles = {
   title: {
     fontSize: FONT_SIZE_18,
-    fontWeight: '400',
+    fontWeight: '600',
   },
   modal: {
     height: Mixin.device_height * 0.18,
