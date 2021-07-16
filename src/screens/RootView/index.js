@@ -35,7 +35,13 @@ const RootView = props => {
       {/* <SafeAreaView style={{flex: 1, backgroundColor: Colors.PRIMARY}}>
         {props.children}
       </SafeAreaView> */}
-      <View style={{flex: 1}}>{props.children}</View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: Colors.LOGO_BACKGROUND_COLOR,
+        }}>
+        {props.children}
+      </View>
     </SafeAreaProvider>
   );
 };

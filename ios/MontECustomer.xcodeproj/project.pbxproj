@@ -12,8 +12,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		189CBDF3267AEDD90018F3E0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189CBDF2267AEDD90018F3E0 /* File.swift */; };
+		18F9FAA426A1340600C4D130 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F9FAA326A1340600C4D130 /* BootSplash.storyboard */; };
 		3C3007E4769C0BE100D3000B /* libPods-MontECustomer-MontECustomerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96C852D0782C008F93D52AFE /* libPods-MontECustomer-MontECustomerTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		E108A9F8C1E22B349A3A8E47 /* libPods-MontECustomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78332194C459F3359C99BFA2 /* libPods-MontECustomer.a */; };
 /* End PBXBuildFile section */
 
@@ -55,10 +55,10 @@
 		189CBDEE267AE9F70018F3E0 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		189CBDF1267AEDD80018F3E0 /* MontECustomer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MontECustomer-Bridging-Header.h"; sourceTree = "<group>"; };
 		189CBDF2267AEDD90018F3E0 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		18F9FAA326A1340600C4D130 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = MontECustomer/BootSplash.storyboard; sourceTree = "<group>"; };
 		3CB11099EA0E5315F684BE3F /* Pods-MontECustomer-MontECustomerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MontECustomer-MontECustomerTests.release.xcconfig"; path = "Target Support Files/Pods-MontECustomer-MontECustomerTests/Pods-MontECustomer-MontECustomerTests.release.xcconfig"; sourceTree = "<group>"; };
 		4AF03E688832430E20BC5E00 /* Pods-MontECustomer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MontECustomer.debug.xcconfig"; path = "Target Support Files/Pods-MontECustomer/Pods-MontECustomer.debug.xcconfig"; sourceTree = "<group>"; };
 		78332194C459F3359C99BFA2 /* libPods-MontECustomer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MontECustomer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MontECustomer/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88F500445541C41292B1399D /* Pods-MontECustomer-MontECustomerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MontECustomer-MontECustomerTests.debug.xcconfig"; path = "Target Support Files/Pods-MontECustomer-MontECustomerTests/Pods-MontECustomer-MontECustomerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		96C852D0782C008F93D52AFE /* libPods-MontECustomer-MontECustomerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MontECustomer-MontECustomerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -121,10 +121,10 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				189CBDF2267AEDD90018F3E0 /* File.swift */,
 				189CBDF1267AEDD80018F3E0 /* MontECustomer-Bridging-Header.h */,
+				18F9FAA326A1340600C4D130 /* BootSplash.storyboard */,
 			);
 			name = MontECustomer;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				18F9FAA426A1340600C4D130 /* BootSplash.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

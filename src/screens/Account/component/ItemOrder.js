@@ -33,18 +33,6 @@ const ItemOrder = props => {
         return trans('delivered');
     }
   };
-  //   case 'verifing':
-  //         return Colors.ORANGE_CODE.orange600;
-  //       case 'verified':
-  //         return Colors.BLUE_CODE.blue600;
-  //       case 'shipping':
-  //         return Colors.LIME_CODE.lime800;
-  //       case 'shipped':
-  //         return Colors.CYAN_CODE.cyan600;
-  //       case 'finish':
-  //         return Colors.GREEN_1;
-  //       case 'cancel':
-  //         return Colors.RED_CODE.red500;
 
   const renderColorStatus = status => {
     switch (status) {

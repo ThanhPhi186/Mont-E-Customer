@@ -13,6 +13,7 @@ export const PLACE_HOLDER = '#a1afc3';
 export const ORANGE = '#FF5C22';
 export const GREEN_1 = '#00A46C';
 export const GREEN_2 = '#CEDC8F';
+export const LOGO_BACKGROUND_COLOR = '#0E3B68';
 
 export const RED_CODE = {
   red50: '#ffebee',
