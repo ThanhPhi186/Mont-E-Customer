@@ -146,10 +146,10 @@ const HomeScreen = ({navigation}) => {
               imageStyle={{width: 120, height: 40}}
             />
             <View style={{flexDirection: 'row'}}>
-              <AppText style={{color: Colors.ORANGE, fontWeight: 'bold'}}>
+              {/* <AppText style={{color: Colors.ORANGE, fontWeight: 'bold'}}>
                 {numeral(userInfo.point).format()}
               </AppText>
-              <AppText style={{fontWeight: 'bold'}}> điểm</AppText>
+              <AppText style={{fontWeight: 'bold'}}> điểm</AppText> */}
             </View>
           </View>
           <View

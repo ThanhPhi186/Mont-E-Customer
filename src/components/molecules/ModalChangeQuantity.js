@@ -15,6 +15,8 @@ const ModalChangeQuantity = forwardRef((props, ref) => {
 
   const [count, setCount] = useState(detailProduct.amount || 1);
 
+  console.log('itemProduct', detailProduct);
+
   useEffect(() => {
     !isVisible && setCount(1);
   }, [isVisible]);

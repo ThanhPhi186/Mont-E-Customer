@@ -28,6 +28,8 @@ const CartScreen = ({navigation}) => {
   };
 
   const editCartItem = () => {
+    // const dataProduct = {...itemCart, ...{amount: refModal.current}};
+    // dispatch(CartRedux.Actions.addToCart(dataProduct));
     // const params = {
     //   amount: refModal.current,
     // };

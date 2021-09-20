@@ -22,30 +22,33 @@ const config = {
 const middleware = [];
 const sagaMiddleware = createSagaMiddleware();
 
-const checkCookiesExpirationMiddleware = store => next => action => {
-  const stateData = store.getState();
-  console.log('checkCookiesExpirationMiddleware', stateData);
-  // if (action.type === AuthenOverallRedux.Actions.LOGIN_SUCCESS) {
-  //   setToken(action.payload.access_token);
-  // }
-  if (stateData.AuthenOverallReducer.cookies) {
-    if (
-      moment(stateData.AuthenOverallReducer.cookies.route.expires).unix() <
-      moment.now() / 1000
-    ) {
-      console.log(
-        'aaaa',
-        stateData?.AuthenOverallReducer?.cookies?.route?.expires,
-      );
-      SimpleToast.show('Phiên đăng nhập hết hạn');
-    } else {
-      console.log('bbbb');
-    }
-  }
-  next(action);
-};
+// const checkCookiesExpirationMiddleware = store => next => action => {
+//   const stateData = store.getState();
+//   // console.log('checkCookiesExpirationMiddleware', stateData);
+//   // if (action.type === AuthenOverallRedux.Actions.LOGIN_SUCCESS) {
+//   //   setToken(action.payload.access_token);
+//   // }
+//   if (stateData.AuthenOverallReducer.cookies) {
+//     if (
+//       moment(stateData.AuthenOverallReducer.cookies.route.expires).unix() <
+//       moment.now() / 1000
+//     ) {
+//       console.log(
+//         'aaaa',
+//         stateData?.AuthenOverallReducer?.cookies?.route?.expires,
+//       );
+//       SimpleToast.show('Phiên đăng nhập hết hạn');
+//     } else {
+//       console.log('bbbb');
+//     }
+//   }
+//   next(action);
+// };
 
-middleware.push(sagaMiddleware, checkCookiesExpirationMiddleware);
+middleware.push(
+  sagaMiddleware,
+  // checkCookiesExpirationMiddleware
+);
 
 if (__DEV__) {
   middleware.push(createLogger());

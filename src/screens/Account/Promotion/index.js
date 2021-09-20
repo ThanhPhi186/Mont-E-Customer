@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, RefreshControl, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Appbar} from 'react-native-paper';
 import {Const, trans} from '../../../utils';
@@ -24,6 +24,8 @@ const PromotionScreen = ({navigation}) => {
 
   const [listPromotion, setListPromotion] = useState([]);
 
+  const [refreshing, setRefreshing] = useState(false);
+
   useEffect(() => {
     const getPromotion = () => {
       const params = {
@@ -40,6 +42,19 @@ const PromotionScreen = ({navigation}) => {
     };
     getPromotion();
   }, [store, BaseUrl]);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    const params = {
+      productStoreId: store,
+    };
+    post(BaseUrl + Const.API.GetOrderPromotions, params).then(res => {
+      if (res.ok) {
+        setRefreshing(false);
+        setListPromotion(res.data.promotions);
+      }
+    });
+  };
 
   const renderEmptyComponent = () => {
     return <AppText style={styles.txtEmpty}>{trans('emptyPromotion')}</AppText>;
@@ -132,6 +147,9 @@ const PromotionScreen = ({navigation}) => {
         renderItem={renderItem}
         contentContainerStyle={{padding: 12}}
         ListEmptyComponent={renderEmptyComponent}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
       <AppDialog
         content={trans('expiredToken')}

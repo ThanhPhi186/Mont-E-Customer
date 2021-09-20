@@ -15,8 +15,9 @@ const AppInput = props => {
     return (
       <View style={styles.viewInput}>
         <TextInput
+          placeholderTextColor={Colors.PLACE_HOLDER}
           {...props}
-          style={{flex: 1, paddingRight: 8}}
+          style={{flex: 1, paddingRight: 8, color: Colors.BLACK}}
           secureTextEntry={secure}
         />
         <TouchableOpacity onPress={() => setSecure(!secure)}>

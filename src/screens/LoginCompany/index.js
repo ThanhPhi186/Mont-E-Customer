@@ -65,6 +65,7 @@ const LoginCompanyScreen = props => {
         onChangeText={text => setCompanyCode(text)}
         placeholder={trans('enterCompanyCode')}
         autoCapitalize="none"
+        placeholderTextColor={Colors.PLACE_HOLDER}
       />
       {/* <Button style={styles.btn} mode="text" color="white" onPress={getCompany}>
         {trans('continue')}

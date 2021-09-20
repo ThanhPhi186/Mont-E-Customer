@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {ScrollView, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Linking,
+  Platform,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Appbar} from 'react-native-paper';
 import SimpleToast from 'react-native-simple-toast';
@@ -58,6 +65,22 @@ const ContactScreen = ({navigation}) => {
     });
   };
 
+  const openFacebook = () => {
+    const pageID = 460699881054856;
+    const scheme = Platform.select({
+      ios: 'fb://profile/',
+      android: 'fb://page/',
+    });
+    Linking.openURL(`${scheme}${pageID}`);
+  };
+
+  const openZalo = () => {
+    Linking.openURL('https://zalo.me/0376871280');
+  };
+  const openGmail = () => {
+    Linking.openURL('mailto:thanhphichv96@@gmail.com');
+  };
+
   return (
     <View style={container}>
       <Appbar.Header>
@@ -84,27 +107,27 @@ const ContactScreen = ({navigation}) => {
               justifyContent: 'space-between',
               marginTop: 8,
             }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openFacebook}>
               <FastImage
                 source={images.facebook}
                 style={{width: 50, height: 50}}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openZalo}>
               <FastImage source={images.zalo} style={{width: 50, height: 50}} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openGmail}>
               <FastImage
                 source={images.gmail}
                 style={{width: 50, height: 50}}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <FastImage
                 source={images.message}
                 style={{width: 50, height: 50}}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={{width: 50, height: 50}} />
           </View>
           <AppText style={{marginTop: 20}}>
@@ -125,7 +148,7 @@ const ContactScreen = ({navigation}) => {
               borderTopLeftRadius: 16,
             }}>
             <TextInput
-              style={{fontStyle: 'italic'}}
+              style={{fontStyle: 'italic', color: Colors.BLACK}}
               placeholderTextColor={Colors.BLACK}
               placeholder="Chủ đề phản hồi của bạn"
               value={title}
@@ -145,6 +168,7 @@ const ContactScreen = ({navigation}) => {
                 flex: 1,
                 fontStyle: 'italic',
                 textAlignVertical: 'top',
+                color: Colors.BLACK,
               }}
               multiline
               placeholderTextColor={Colors.BLACK}

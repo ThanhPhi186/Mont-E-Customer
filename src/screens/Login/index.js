@@ -13,6 +13,7 @@ import {post, setCookies} from '../../services/ServiceHandle';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthenOverallRedux} from '../../redux';
 import CookieManager from '@react-native-cookies/cookies';
+import {Colors} from '../../styles';
 
 const LoginScreen = ({navigation}) => {
   const BaseUrl = useSelector(state => state.AuthenOverallReducer.domain);
@@ -102,6 +103,8 @@ const LoginScreen = ({navigation}) => {
               onChangeText={setUserName}
               placeholder="Tên đăng nhập"
               autoCapitalize="none"
+              style={{color: Colors.BLACK}}
+              placeholderTextColor={Colors.PLACE_HOLDER}
             />
           </View>
           <AppInput

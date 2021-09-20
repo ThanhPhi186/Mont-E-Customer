@@ -28,7 +28,7 @@ const ProductPaymentItem = props => {
             paddingRight: 16,
           }}>
           <AppText style={styles.textPrice}>
-            {numeral(item.priceVAT).format()} đ
+            {numeral(item.price).format()} đ
           </AppText>
           <AppText style={styles.textPrice}>X {item.amount}</AppText>
         </View>

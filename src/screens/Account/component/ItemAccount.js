@@ -24,9 +24,9 @@ const ItemAccount = props => {
             source={images.logoHorizontal}
             imageStyle={{width: 120, height: 40}}
           />
-          <Text style={styles.txtPoint}>
+          {/* <Text style={styles.txtPoint}>
             {numeral(point).format()} <Text style={styles.textTitle}>điểm</Text>
-          </Text>
+          </Text> */}
         </View>
       </View>
     );

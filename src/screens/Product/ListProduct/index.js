@@ -8,10 +8,10 @@ import {Const, trans} from '../../../utils';
 import {images} from '../../../assets';
 import {get, post} from '../../../services/ServiceHandle';
 
-import {Button, ItemProduct} from '../../../components/molecules';
+import {AppDialog, Button, ItemProduct} from '../../../components/molecules';
 import IconCart from '../../../components/molecules/IconCart';
 import {useDispatch, useSelector} from 'react-redux';
-import {CartRedux} from '../../../redux';
+import {AuthenOverallRedux, CartRedux} from '../../../redux';
 import ModalChangeQuantity from '../../../components/molecules/ModalChangeQuantity';
 import styles from './styles';
 import {Mixin} from '../../../styles';
@@ -30,6 +30,7 @@ const ListProduct = ({navigation, route}) => {
   const [listProduct, setListProduct] = useState([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [itemProduct, setItemProduct] = useState();
+  const [modalLogout, setModalLogout] = useState(false);
 
   useEffect(() => {
     const params = {
@@ -40,7 +41,10 @@ const ListProduct = ({navigation, route}) => {
     const getListProduct = () => {
       post(BaseUrl + Const.API.GetListProduct, params).then(res => {
         if (res.ok) {
-          setListProduct(res.data.listProducts);
+          if (res.data.login === 'FALSE') {
+            return setModalLogout(true);
+          }
+          setListProduct(res.data.listProducts.filter(elm => elm.available));
         }
       });
     };
@@ -75,10 +79,10 @@ const ListProduct = ({navigation, route}) => {
       <Appbar.Header>
         <Appbar.BackAction color="white" onPress={() => navigation.goBack()} />
         <Appbar.Content color="white" title={trans('listProduct')} />
-        <IconCart
+        {/* <IconCart
           number={numberProductCart}
           onPress={() => navigation.navigate('CartScreen')}
-        />
+        /> */}
       </Appbar.Header>
       <View style={{flex: 1}}>
         <FlatList
@@ -112,6 +116,16 @@ const ListProduct = ({navigation, route}) => {
           onPress={() => navigation.navigate('CartScreen')}
         />
       )}
+      <AppDialog
+        content={trans('expiredToken')}
+        isVisible={modalLogout}
+        onPressClose={() => {
+          setModalLogout(false);
+          setTimeout(() => {
+            dispatch(AuthenOverallRedux.Actions.logout.request());
+          }, 500);
+        }}
+      />
     </View>
   );
 };

@@ -15,24 +15,26 @@ const NotificationScreen = ({navigation}) => {
     {
       status: false,
       message: 'Reminder: You better be ready! flight is tomorrow at 9am',
-      created_at: 1622619872597,
+      created_at: 1627630881597,
     },
     {
       status: false,
       message: 'Reminder: You have 1 invitation tonight at 17pm',
-      created_at: 1622586118597,
+      created_at: 1627629881597,
     },
     {
       status: true,
       message: 'Reminder: You transfer from the hotel to airport at 5pm',
-      created_at: 1622501213597,
+      created_at: 1627610881597,
     },
     {
       status: false,
       message: 'Offer: Off-Season will end in 20 Oct get it now',
-      created_at: 1622486118597,
+      created_at: 1627600881597,
     },
   ];
+
+  console.log(moment().unix());
 
   const renderItem = ({item}) => {
     return (

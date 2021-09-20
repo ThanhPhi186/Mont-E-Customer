@@ -10,7 +10,6 @@ import BootSplash from 'react-native-bootsplash';
 import {images} from './src/assets';
 import {Animated, StyleSheet} from 'react-native';
 import {device_height} from './src/styles/Mixin';
-import 'react-native-gesture-handler';
 
 const {persistor, store} = configureStore();
 // persistor.purge();

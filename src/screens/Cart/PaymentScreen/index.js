@@ -62,7 +62,9 @@ const PaymentScreen = ({navigation}) => {
         setLoading(false);
         setTimeout(() => {
           SimpleToast.show(trans('createOrderSuccessfully'), SimpleToast.SHORT);
-          navigation.popToTop();
+          navigation.navigate(trans('personal'), {
+            screen: 'HistoryOrder',
+          });
         }, 700);
       } else {
         setLoading(false);

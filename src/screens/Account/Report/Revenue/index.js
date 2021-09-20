@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {processColor, View} from 'react-native';
 import {AppText} from '../../../../components/atoms';
-import {container} from '../../../../styles/GlobalStyles';
 import {BarChart} from 'react-native-charts-wrapper';
 import styles from './styles';
 import {trans} from '../../../../utils';

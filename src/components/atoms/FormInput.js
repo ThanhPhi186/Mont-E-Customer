@@ -67,7 +67,13 @@ const FormInput = props => {
           </TouchableOpacity>
         );
       default:
-        return <TextInput {...props} style={styles.txtInput} />;
+        return (
+          <TextInput
+            {...props}
+            style={styles.txtInput}
+            placeholderTextColor={Colors.PLACE_HOLDER}
+          />
+        );
     }
   };
 
@@ -119,6 +125,7 @@ const styles = {
     borderRadius: Mixin.moderateSize(4),
     paddingHorizontal: 8,
     fontSize: FONT_SIZE_14,
+    color: Colors.BLACK,
   },
   title: {
     fontSize: FONT_SIZE_14,
